@@ -1,0 +1,24 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pathovariant-backend
+    ports:
+      - "8000:8000"
+      - "3000:3000"
+    environment:
+      - NCBI_EMAIL=${NCBI_EMAIL:-anonymous@example.com}
+      - NCBI_API_KEY=${NCBI_API_KEY:-}
+    volumes:
+      - ./backend/data:/app/backend/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=5)"
+      interval: 30s
+      timeout: 5s
+      retries: 3

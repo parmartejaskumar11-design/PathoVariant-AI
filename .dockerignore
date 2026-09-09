@@ -1,0 +1,17 @@
+.git
+.gitignore
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/.DS_Store
+**/node_modules
+**/dist
+**/coverage
+*.log
+.venv
+backend/.env
+backend/.venv
+frontend/node_modules
+frontend/dist
+frontend/coverage
+endpoint_smoke_test.json

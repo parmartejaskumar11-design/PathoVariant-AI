@@ -1,0 +1,33 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build -t pathovariant:ci .
+
+      - name: Run container
+        run: docker run -d --name pv-test -p 8000:8000 -p 3000:3000 pathovariant:ci
+
+      - name: Smoke test backend + nginx proxy
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:8000/api/health; then break; fi
+            sleep 2
+          done
+          curl -sf http://127.0.0.1:8000/api/health | grep -q '"status":"healthy"'
+          curl -sf http://127.0.0.1:3000/ | grep -qi "pathovariant"
+          curl -sf http://127.0.0.1:3000/api/health | grep -q '"status":"healthy"'
+
+      - name: Logs on failure
+        if: failure()
+        run: docker logs pv-test

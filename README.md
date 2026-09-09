@@ -8,35 +8,45 @@ Upload or paste DNA/RNA sequence data in FASTA format and get AI-powered classif
 
 - **Pathogen Analysis** — hybrid AI engine (biology-informed heuristics blended with a RandomForest) classifies each sequence into three risk tiers with confidence scores and interpretable subscores.
 - **Batch Analysis** — analyze up to 20 FASTA files in one request with a per-file summary.
-- **Rich dashboard** — Recharts visualizations (GC distribution, risk pie, nucleotide composition), CSV export, dark/light mode, glass-morphism UI.
+- **Rich Dashboards** — dual frontend support: React/Vite/Tailwind SPA and interactive Streamlit Web App.
 - **Persistent AI model** — trained on labeled data and persisted with joblib; auto-reloaded on startup (no retraining on every boot).
 
 ## Tech Stack
 
-| Layer    | Technology                                            |
-| -------- | ----------------------------------------------------- |
-| Backend  | Python 3.13, FastAPI, Biopython, scikit-learn, joblib |
-| Frontend | React 18, Vite, Tailwind CSS, Recharts, Lucide        |
+| Layer       | Technology                                                |
+| ----------- | --------------------------------------------------------- |
+| Backend     | Python 3.13, FastAPI, Biopython, scikit-learn, joblib     |
+| Frontend    | React 18, Vite, Tailwind CSS, Recharts, Lucide            |
+| ML App      | Streamlit, Plotly, Pandas                                 |
+| Deployments | Docker, Streamlit Cloud, Render, Vercel                   |
 
 ## Project Structure
 
 ```
 PathoVariant-AI/
+  streamlit_app.py        # Streamlit Community Cloud web app
   backend/
-    main.py                 # FastAPI entry point (4 endpoints)
+    main.py               # FastAPI entry point (4 endpoints)
     requirements.txt
     src/
-      parser.py             # FASTA parsing (Biopython)
-      ai_engine.py          # K-mer + RandomForest risk engine (persistable)
+      parser.py           # FASTA parsing (Biopython)
+      ai_engine.py        # K-mer + RandomForest risk engine (persistable)
       __init__.py
-    data/                   # Sample sequences; models persist here
-    tests/                  # pytest suite
+    data/                 # Sample sequences; models persist here
+    tests/                # pytest suite
   frontend/
     src/
-      App.jsx               # Analysis dashboard
-      components/           # Navbar, FileUploader, MetricsCard, Charts
+      App.jsx             # React analysis dashboard
+      components/         # Navbar, FileUploader, MetricsCard, Charts
   Dockerfile
   docker-compose.yml
+```
+
+## Quick Start: Streamlit App
+
+```bash
+pip install -r requirements.txt
+streamlit run streamlit_app.py
 ```
 
 ## Getting Started

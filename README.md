@@ -1,13 +1,16 @@
-﻿# PathoVariant-AI
+# PathoVariant-AI
 
 **Autonomous Pathogen Mutation & AI Functional Impact Analyzer**
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://pathovariant-ai.streamlit.app/)
 [![CI](https://github.com/parmartejaskumar11-design/PathoVariant-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/parmartejaskumar11-design/PathoVariant-AI/actions/workflows/ci.yml)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-18-61DAFB.svg?logo=react)](https://react.dev)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.30-FF4B4B.svg?logo=streamlit)](https://streamlit.io)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.30-FF4B4B.svg?logo=streamlit)](https://pathovariant-ai.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.13-blue.svg?logo=python)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+> 🚀 **Live Streamlit App:** [https://pathovariant-ai.streamlit.app/](https://pathovariant-ai.streamlit.app/)
 
 ---
 

@@ -30,6 +30,8 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files])
 
+  const API_BASE = import.meta.env.VITE_API_BASE_URL || ""
+
   const processFiles = async (selectedFiles) => {
     setIsProcessing(true)
     setAnalyzeError("")
@@ -38,7 +40,7 @@ const App = () => {
       if (selectedFiles.length === 1) {
         const formData = new FormData()
         formData.append("file", selectedFiles[0])
-        const response = await fetch("/api/analyze", { method: "POST", body: formData })
+        const response = await fetch(`${API_BASE}/api/analyze`, { method: "POST", body: formData })
         const result = await response.json()
         if (!response.ok || result.error) {
           setAnalyzeError(result.error || `Analysis failed (HTTP ${response.status}). Please try again.`)
@@ -48,7 +50,7 @@ const App = () => {
       } else {
         const formData = new FormData()
         selectedFiles.forEach((f) => formData.append("files", f))
-        const response = await fetch("/api/analyze-batch", { method: "POST", body: formData })
+        const response = await fetch(`${API_BASE}/api/analyze-batch`, { method: "POST", body: formData })
         const result = await response.json()
         if (!response.ok || result.error) {
           setAnalyzeError(result.error || `Batch analysis failed (HTTP ${response.status}).`)
@@ -58,7 +60,7 @@ const App = () => {
       }
     } catch (error) {
       console.error("Analysis error:", error)
-      setAnalyzeError("Could not reach the analysis server. Make sure the backend is running on port 8000, then try again.")
+      setAnalyzeError("Could not reach the analysis server. Make sure the backend is running, then try again.")
     } finally {
       setIsProcessing(false)
     }

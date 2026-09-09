@@ -1,0 +1,11 @@
+﻿services:
+  - type: web
+    name: pathovariant-ai
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerContext: .
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: PORT
+        value: 3000
